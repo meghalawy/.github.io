@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reem Elmeghalawy — Healthcare Data Analyst</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --teal-50: #f0fdfa;
+            --teal-100: #ccfbf1;
+            --teal-200: #99f6e4;
+            --teal-500: #14b8a6;
+            --teal-600: #0d9488;
+            --teal-700: #0f766e;
+            --teal-800: #115e59;
+            --teal-900: #134e4a;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        nav {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--teal-700);
+        }
+        .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+        .nav-links a {
+            padding: 6px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--teal-600);
+            color: white;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--teal-700), var(--teal-900));
+            color: white;
+            padding: 60px 20px;
+        }
+        .hero-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .hero-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.7;
+            margin-bottom: 8px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        .hero-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-white { background: white; color: var(--teal-700); }
+        .btn-white:hover { background: var(--teal-50); }
+        .btn-outline { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.25); }
+        .btn-outline:hover { background: rgba(255,255,255,0.2); }
+
+        /* SECTIONS */
+        .section {
+            display: none;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 48px 20px;
+        }
+        .section.active { display: block; }
+        .section h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+        .section .subtitle {
+            color: var(--gray-500);
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
+
+        /* PROJECT CARDS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 640px) {
+            .projects-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            padding: 24px;
+            transition: box-shadow 0.3s;
+        }
+        .project-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .project-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+        .project-icon {
+            width: 40px; height: 40px;
+            background: var(--teal-50);
+            color: var(--teal-600);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+        .project-title { font-weight: 700; color: var(--gray-900); font-size: 1rem; line-height: 1.3; }
+        .project-sub { font-size: 0.8rem; color: var(--teal-600); font-weight: 600; }
+        .project-badge {
+            font-size: 0.7rem;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-left: auto;
+            white-space: nowrap;
+            align-self: flex-start;
+        }
+        .project-desc {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .project-result {
+            background: var(--teal-50);
+            border-left: 3px solid var(--teal-500);
+            padding: 10px 14px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+            font-size: 0.82rem;
+            color: var(--teal-800);
+            font-weight: 500;
+        }
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+        .tag {
+            font-size: 0.75rem;
+            background: var(--teal-50);
+            color: var(--teal-700);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        .project-link {
+            font-size: 0.82rem;
+            color: var(--gray-500);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+        .project-link:hover { color: var(--teal-600); }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 640px) {
+            .skills-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .skill-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            padding: 24px;
+        }
+        .skill-card h3 {
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+        }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-tag {
+            background: var(--teal-50);
+            color: var(--teal-700);
+            font-size: 0.82rem;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        /* EXPERIENCE */
+        .timeline { display: flex; flex-direction: column; gap: 16px; }
+        .timeline-item {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        .timeline-dot {
+            width: 12px; height: 12px;
+            background: var(--teal-500);
+            border-radius: 50%;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+        .timeline-role { font-weight: 700; color: var(--gray-900); font-size: 0.95rem; }
+        .timeline-company { font-weight: 600; color: var(--teal-600); font-size: 0.85rem; }
+        .timeline-period { color: var(--gray-400); font-size: 0.82rem; margin-top: 2px; }
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-top: 8px;
+            line-height: 1.7;
+        }
+
+        /* CERTIFICATIONS */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        @media (min-width: 640px) {
+            .cert-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .cert-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            padding: 20px;
+        }
+        .cert-name { font-weight: 600; color: var(--gray-900); font-size: 0.88rem; line-height: 1.4; }
+        .cert-org { color: var(--teal-600); font-size: 0.82rem; font-weight: 500; margin-top: 4px; }
+
+        /* ABOUT */
+        .about-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            padding: 32px;
+            max-width: 700px;
+        }
+        .about-card p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .about-card p:last-child { margin-bottom: 0; }
+        .about-highlight {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            text-align: center;
+            padding: 32px 20px;
+            font-size: 0.85rem;
+        }
+        footer span { color: var(--gray-500); }
+
+        /* MOBILE */
+        @media (max-width: 500px) {
+            .hero h1 { font-size: 1.8rem; }
+            .hero { padding: 40px 16px; }
+            .nav-links a { padding: 5px 10px; font-size: 0.78rem; }
+            .project-badge { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="nav-inner">
+        <span class="nav-logo">RE</span>
+        <div class="nav-links">
+            <a href="#" class="active" onclick="showTab('projects', this)">Projects</a>
+            <a href="#" onclick="showTab('skills', this)">Skills</a>
+            <a href="#" onclick="showTab('experience', this)">Experience</a>
+            <a href="#" onclick="showTab('certs', this)">Certifications</a>
+            <a href="#" onclick="showTab('about', this)">About</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-inner">
+        <div class="hero-label">Healthcare Data Analyst — Riyadh, Saudi Arabia</div>
+        <h1>Reem Elmeghalawy</h1>
+        <p>Biomedical scientist turned data analyst. I combine clinical domain expertise with Python, SQL, and Power BI to turn complex health data into actionable insights.</p>
+        <div class="hero-buttons">
+            <!-- REPLACE THESE LINKS WITH YOUR REAL ONES -->
+            <a href="mailto:your.email@gmail.com" class="btn btn-white">✉️ Email Me</a>
+            <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank" class="btn btn-outline">💼 LinkedIn</a>
+            <a href="https://github.com/YOUR-GITHUB" target="_blank" class="btn btn-outline">💻 GitHub</a>
+        </div>
+    </div>
+</header>
+
+<!-- PROJECTS -->
+<section id="projects" class="section active">
+    <h2>Projects</h2>
+    <p class="subtitle">Hands-on work in healthcare analytics, machine learning, and data science.</p>
+    <div class="projects-grid">
+
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">🔬</div>
+                <div>
+                    <div class="project-title">Antibiotic Resistance Trend Analysis</div>
+                    <div class="project-sub">Klebsiella pneumoniae</div>
+                </div>
+                <span class="project-badge">Healthcare</span>
+            </div>
+            <div class="project-desc">
+                Cleaned, validated, and analyzed large-scale clinical microbiology datasets for antimicrobial resistance (AMR) trends. Performed statistical analysis on resistance patterns across multiple antibiotic classes to support data-driven infection control decisions.
+            </div>
+            <div class="project-result">
+                📊 Identified statistically significant resistance trends across 15,000+ isolate records, informing antibiotic stewardship recommendations.
+            </div>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Pandas</span>
+                <span class="tag">Matplotlib</span>
+                <span class="tag">Statistical Analysis</span>
+            </div>
+            <!-- REPLACE # WITH YOUR GITHUB REPO LINK -->
+            <a href="#" class="project-link" target="_blank">🔗 View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">🧠</div>
+                <div>
+                    <div class="project-title">Breast Cancer Classification</div>
+                    <div class="project-sub">Deep Learning</div>
+                </div>
+                <span class="project-badge">Machine Learning</span>
+            </div>
+            <div class="project-desc">
+                Developed and evaluated a Feedforward Neural Network for binary classification of breast cancer diagnoses. Implemented systematic hyperparameter tuning, cross-validation, and comprehensive model evaluation.
+            </div>
+            <div class="project-result">
+                🎯 Achieved 96.5% test accuracy with optimized architecture and regularization.
+            </div>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">Scikit-learn</span>
+                <span class="tag">Neural Networks</span>
+            </div>
+            <a href="#" class="project-link" target="_blank">🔗 View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">📊</div>
+                <div>
+                    <div class="project-title">EEG Motor Imagery Classification</div>
+                    <div class="project-sub">Brain-Computer Interface</div>
+                </div>
+                <span class="project-badge">Machine Learning</span>
+            </div>
+            <div class="project-desc">
+                Built an end-to-end ML pipeline for EEG brain signal preprocessing, feature extraction, and multi-class classification for brain-computer interface applications.
+            </div>
+            <div class="project-result">
+                🧪 Developed a complete pipeline from raw EEG signals to classification output with multiple model comparisons.
+            </div>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Scikit-learn</span>
+                <span class="tag">MNE</span>
+                <span class="tag">Signal Processing</span>
+            </div>
+            <a href="#" class="project-link" target="_blank">🔗 View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">⚡</div>
+                <div>
+                    <div class="project-title">Renewable Energy Adoption Analysis</div>
+                    <div class="project-sub">SDG 7 — Global Analysis</div>
+                </div>
+                <span class="project-badge">Data Analysis</span>
+            </div>
+            <div class="project-desc">
+                Conducted cross-country comparative analysis of renewable energy adoption rates using UN and World Bank datasets. Identified infrastructure gaps and policy drivers across regions.
+            </div>
+            <div class="project-result">
+                🌍 Delivered strategic recommendations for energy transition planning based on data from 50+ countries.
+            </div>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Excel</span>
+                <span class="tag">Power BI</span>
+                <span class="tag">Data Visualization</span>
+            </div>
+            <a href="#" class="project-link" target="_blank">🔗 View on GitHub →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+    <h2>Technical Skills</h2>
+    <p class="subtitle">Tools and technologies I use across data analysis, visualization, and machine learning.</p>
+    <div class="skills-grid">
+        <div class="skill-card">
+            <h3>📊 Data Analysis & Programming</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Pandas</span>
+                <span class="skill-tag">NumPy</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">Advanced Excel</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>📈 Visualization & BI</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Power BI</span>
+                <span class="skill-tag">DAX</span>
+                <span class="skill-tag">Matplotlib</span>
+                <span class="skill-tag">Seaborn</span>
+                <span class="skill-tag">Excel Dashboards</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>🤖 ML & Deep Learning</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Scikit-learn</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">TensorFlow</span>
+                <span class="skill-tag">Regression</span>
+                <span class="skill-tag">Classification</span>
+                <span class="skill-tag">Neural Networks</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>🏥 Domain Expertise</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Healthcare Analytics</span>
+                <span class="skill-tag">Clinical Data</span>
+                <span class="skill-tag">Biomedical Research</span>
+                <span class="skill-tag">AI Data Quality</span>
+                <span class="skill-tag">AMR Analysis</span>
+                <span class="skill-tag">Bioinformatics</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+    <h2>Experience</h2>
+    <p class="subtitle">Professional roles spanning clinical lab work, AI data quality, and analytics.</p>
+    <div class="timeline">
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+                <div class="timeline-role">Data Analyst Intern</div>
+                <div class="timeline-company">Truvian Intelligence</div>
+                <div class="timeline-period">Jul – Aug 2025</div>
+                <div class="timeline-desc">
+                    Supported end-to-end data analysis workflows including data cleaning, exploratory analysis, and dashboard development for business intelligence reporting.
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+                <div class="timeline-role">Data Analysis Trainee</div>
+                <div class="timeline-company">Women Techsters Fellowship</div>
+                <div class="timeline-period">Mar – Jun 2025</div>
+                <div class="timeline-desc">
+                    Completed intensive data analysis training covering Python, SQL, Power BI, and applied statistics. Delivered analytical projects with real-world datasets.
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+                <div class="timeline-role">AI Data Quality Analyst</div>
+                <div class="timeline-company">Telus International AI</div>
+                <div class="timeline-period">Oct 2022 – Aug 2023</div>
+                <div class="timeline-desc">
+                    Evaluated AI model outputs against quality rubrics. Annotated and validated large-scale datasets to improve model performance. Maintained high accuracy and consistency metrics across thousands of assessments.
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+                <div class="timeline-role">Microbiologist & Medical Analysis Specialist</div>
+                <div class="timeline-company">Delta Lab — Clinical Diagnostics</div>
+                <div class="timeline-period">Aug 2021 – Dec 2022</div>
+                <div class="timeline-desc">
+                    Processed and analyzed clinical specimens, maintained QC databases, and generated diagnostic reports. Tracked antimicrobial susceptibility patterns across patient data, contributing to infection control reporting.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs" class="section">
+    <h2>Certifications & Training</h2>
+    <p class="subtitle">Continuous professional development in data science, bioinformatics, and deep learning.</p>
+    <div class="cert-grid">
+        <div class="cert-card">
+            <div class="cert-name">Google Advanced Data Analytics Professional Certificate</div>
+            <div class="cert-org">Google</div>
+        </div>
+        <div class="cert-card">
+            <div class="cert-name">Deep Learning Fundamentals in Biomedical Applications</div>
+            <div class="cert-org">Nile University</div>
+        </div>
+        <div class="cert-card">
+            <div class="cert-name">Bioinformatics & Computational Biology Diploma</div>
+            <div class="cert-org">German University in Cairo</div>
+        </div>
+        <div class="cert-card">
+            <div class="cert-name">Bioinformatics & Data Science in Precision Medicine</div>
+            <div class="cert-org">Stanford University</div>
+        </div>
+        <div class="cert-card">
+            <div class="cert-name">Advanced Bioinformatics IBT-AHRI</div>
+            <div class="cert-org">University of Cape Town</div>
+        </div>
+        <div class="cert-card">
+            <div class="cert-name">Computational Neuroscience</div>
+            <div class="cert-org">Arabs in Neuroscience</div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+    <h2>About Me</h2>
+    <p class="subtitle">My path from the lab bench to the data pipeline.</p>
+    <div class="about-card">
+        <p>
+            I started my career as a biomedical scientist working in clinical diagnostics — processing patient samples, running antimicrobial susceptibility tests, and generating lab reports at a diagnostic facility in Egypt. That's where I first realized that <span class="about-highlight">the data coming out of the lab was just as important as the benchwork itself.</span>
+        </p>
+        <p>
+            I wanted to do more with that data. I pursued a diploma in bioinformatics and computational biology at the German University in Cairo, trained in deep learning for biomedical applications at Nile University, and completed Stanford's precision medicine data science program. I earned the Google Advanced Data Analytics Professional Certificate and built hands-on projects in healthcare ML, clinical data analysis, and business intelligence.
+        </p>
+        <p>
+            Today I'm based in <span class="about-highlight">Riyadh, Saudi Arabia</span>, looking for opportunities where I can combine my clinical domain expertise with my data skills — analyzing healthcare data, building dashboards, supporting clinical research, or working on health AI initiatives. I'm especially drawn to roles that sit at the intersection of healthcare and data, where understanding what the data actually means matters as much as knowing how to query it.
+        </p>
+        <p>
+            If you're hiring or know someone who is, I'd love to connect: <a href="mailto:your.email@gmail.com" style="color: var(--teal-600); font-weight: 600;">your.email@gmail.com</a>
+        </p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>Reem Elmeghalawy — Riyadh, Saudi Arabia</p>
+    <p><span>Healthcare Data Analyst</span></p>
+</footer>
+
+<script>
+    function showTab(tabId, clickedLink) {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        // Show selected
+        document.getElementById(tabId).classList.add('active');
+        // Update nav
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        clickedLink.classList.add('active');
+        // Prevent page jump
+        event.preventDefault();
+        // Scroll to top of content
+        window.scrollTo({ top: document.querySelector('.hero').offsetHeight + 60, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
